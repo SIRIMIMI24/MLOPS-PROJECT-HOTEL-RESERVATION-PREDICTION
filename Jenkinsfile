@@ -3,6 +3,8 @@ pipeline{
 
     environment {
         VENV_DIR = 'venv'
+        GCP_PROJECT = "mlops-new-447207"
+        GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
     }
 
     stages{
@@ -10,7 +12,7 @@ pipeline{
             steps{
                 script{
                     echo 'Cloning Github repo to Jenkins............'
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/data-guru0/MLOPS-COURSE-PROJECT-1.git']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'githup-token', url: 'https://github.com/SIRIMIMI24/MLOPS-PROJECT-HOTEL-RESERVATION-PREDICTION.git']])
                 }
             }
         }
@@ -28,6 +30,6 @@ pipeline{
                 }
             }
         }
-
+        
     }
 }
