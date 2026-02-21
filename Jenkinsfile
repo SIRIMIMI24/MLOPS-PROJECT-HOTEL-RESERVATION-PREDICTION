@@ -29,7 +29,7 @@ pipeline{
             steps{
                 sh '''
                 . ${VENV_DIR}/bin/activate
-                python src/pipeline/training_pipeline.py
+                python pipeline/training_pipeline.py
                 '''
             }
         }
