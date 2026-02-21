@@ -3,56 +3,31 @@ pipeline{
 
     environment {
         VENV_DIR = 'venv'
-        IMAGE_NAME = 'hotel-reservation-model'
     }
 
     stages{
-
-        stage('Clone Repository'){
+        stage('Cloning Github repo to Jenkins'){
             steps{
-                checkout scm
+                script{
+                    echo 'Cloning Github repo to Jenkins............'
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'githup-token', url: 'https://github.com/SIRIMIMI24/MLOPS-PROJECT-HOTEL-RESERVATION-PREDICTION.git']])
+                }
             }
         }
 
-        stage('Setup Virtual Environment'){
+        stage('Setting up our Virtual Environment and Installing dependancies'){
             steps{
-                sh '''
-                python -m venv ${VENV_DIR}
-                . ${VENV_DIR}/bin/activate
-                pip install --upgrade pip
-                pip install -e .
-                '''
+                script{
+                    echo 'Setting up our Virtual Environment and Installing dependancies............'
+                    sh '''
+                    python -m venv ${VENV_DIR}
+                    . ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
+                    pip install -e .
+                    '''
+                }
             }
         }
-
-        stage('Train Model'){
-            steps{
-                sh '''
-                . ${VENV_DIR}/bin/activate
-                python pipeline/training_pipeline.py
-                '''
-            }
-        }
-
-        stage('Build Docker Image'){
-            steps{
-                sh '''
-                docker build -t ${IMAGE_NAME}:latest .
-                '''
-            }
-        }
-
-        stage('Deploy Locally'){
-            steps{
-                sh '''
-                docker stop hotel-container || true
-                docker rm hotel-container || true
-                docker run -d \
-                -p 5000:5000 \
-                --name hotel-container \
-                ${IMAGE_NAME}:latest
-                '''
-            }
-        }
+        
     }
 }
