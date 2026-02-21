@@ -4,7 +4,6 @@ artifacts/processed/
 artifacts/models/
 MLOPS_PROJECT_1.egg-info/
 mlruns/
-config/
 
 # Python cache
 __pycache__/
