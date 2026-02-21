@@ -83,3 +83,8 @@ python --version
 
 docker restart jenkins-dind
 
+
+git version control
+git add Jenkinsfile // git add .
+git commit -m "Fix pipeline keyword typo"
+git push origin main
