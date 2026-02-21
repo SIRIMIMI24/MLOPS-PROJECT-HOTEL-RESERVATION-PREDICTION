@@ -4,19 +4,18 @@ pipeline{
     environment {
         VENV_DIR = 'venv'
     }
-    
+
     stages{
-        stage('Cloning Githup Repository to Jenkins'){
+        stage('Cloning Github repo to Jenkins'){
             steps{
                 script{
-                    echo 'Cloning Githup Repository to Jenkins .........'
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'githup-token', url: 'https://github.com/SIRIMIMI24/MLOPS-PROJECT-HOTEL-RESERVATION-PREDICTION.git']])
+                    echo 'Cloning Github repo to Jenkins............'
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/data-guru0/MLOPS-COURSE-PROJECT-1.git']])
                 }
             }
         }
-    }
-    
-    stage('Setting up our Virtual Environment and Installing dependancies'){
+
+        stage('Setting up our Virtual Environment and Installing dependancies'){
             steps{
                 script{
                     echo 'Setting up our Virtual Environment and Installing dependancies............'
@@ -28,5 +27,7 @@ pipeline{
                     '''
                 }
             }
+        }
+
     }
 }
