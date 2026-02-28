@@ -3,6 +3,7 @@ artifacts/raw/
 artifacts/processed/
 artifacts/models/
 MLOPS_PROJECT_1.egg-info/
+MLOPS_PROJECT_HOTEL_RESERVATION_PREDICTION.egg-inf
 mlruns/
 
 # Python cache
